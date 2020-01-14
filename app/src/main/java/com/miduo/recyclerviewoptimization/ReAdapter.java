@@ -28,6 +28,18 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
     @Override
     public RViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item,null);
+        view.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                if(callBackListener!=null)
+                {
+                    callBackListener.onClick((Integer) v.getTag());
+                }
+
+            }
+        });
         RViewHolder viewHolder=new RViewHolder(view);
         return viewHolder;
     }
@@ -35,6 +47,7 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RViewHolder holder, int position) {
 
+        holder.itemView.setTag(position);
         Desc desc=datas.get(position);
         Glide.with(context).load(desc.getPic()).into(holder.iv_pic);
         holder.tv.setText(desc.getText());
@@ -49,12 +62,26 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
     {
         ImageView iv_pic;
         TextView tv;
+        View itemView;
 
         public RViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView=itemView;
             iv_pic=itemView.findViewById(R.id.iv_pic);
             tv=itemView.findViewById(R.id.tv);
         }
+    }
+
+    CallBackListener callBackListener;
+
+    public void setCallBackListener(CallBackListener callBackListener)
+    {
+        this.callBackListener=callBackListener;
+    }
+
+    interface CallBackListener
+    {
+        void onClick(int position);
     }
 }
 
