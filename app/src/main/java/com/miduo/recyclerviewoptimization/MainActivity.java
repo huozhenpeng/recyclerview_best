@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     ReAdapter reAdapter;
 
     Button button;
-    int id=0;
+    int id=101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"点击"+position,Toast.LENGTH_SHORT).show();
             }
         });
+        initData();
         recycler=findViewById(R.id.recycler);
         button=findViewById(R.id.button);
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -52,4 +53,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void initData()
+    {
+        for (int i=0;i<100;i++)
+        {
+            Desc desc=new Desc();
+            desc.setPic("https://img.iplaysoft.com/wp-content/uploads/2019/free-images/free_stock_photo.jpg");
+            desc.setText("图片描述信息:"+id);
+            desc.setId(id++);
+            datas.add(desc);
+        }
+    }
+
+
 }

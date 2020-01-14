@@ -1,6 +1,7 @@
 package com.miduo.recyclerviewoptimization;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
 
+    private String TAG="ReAdapter";
     private Context context;
     private List<Desc> datas;
 
@@ -82,6 +84,17 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
     interface CallBackListener
     {
         void onClick(int position);
+    }
+
+    /**
+     * 可以做广告统计
+     * 但是有一点，每次调用notifyDataSetChanged当前页面所有的item都会调用一次
+     * @param holder
+     */
+    @Override
+    public void onViewAttachedToWindow(@NonNull RViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        Log.e(TAG,holder.tv.getText().toString());
     }
 }
 
