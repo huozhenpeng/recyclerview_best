@@ -1,6 +1,7 @@
 package com.miduo.recyclerviewoptimization;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,8 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
         return viewHolder;
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull RViewHolder holder, int position) {
 
@@ -53,6 +56,33 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
         Desc desc=datas.get(position);
         Glide.with(context).load(desc.getPic()).into(holder.iv_pic);
         holder.tv.setText(desc.getText());
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RViewHolder holder, int position, @NonNull List<Object> payloads) {
+
+        if(payloads.isEmpty())
+        {
+            super.onBindViewHolder(holder, position, payloads);
+        }
+        else
+        {
+            Bundle bundle= (Bundle) payloads.get(0);
+            for(String key:bundle.keySet())
+            {
+                switch (key)
+                {
+                    case "desc":
+                        holder.tv.setText(bundle.getString("desc"));
+                        break;
+                    case "pic":
+                        Log.e(TAG,"pic:"+bundle.getString("pic"));
+                        Glide.with(context).load(bundle.getString("pic")).into(holder.iv_pic);
+                        break;
+                }
+            }
+        }
+
     }
 
     @Override
