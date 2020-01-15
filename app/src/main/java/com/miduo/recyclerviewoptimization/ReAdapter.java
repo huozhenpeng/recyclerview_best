@@ -86,6 +86,11 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.RViewHolder> {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public int getItemCount() {
         return datas.size();
     }

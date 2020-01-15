@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
 //                reAdapter.notifyDataSetChanged();
 
+//                明确知道了要更新的item可以用这个
+//                reAdapter.notifyItemChanged(pisiton);
+//                reAdapter.notifyItemChanged(pisiton,payload);
+
             }
         });
 
